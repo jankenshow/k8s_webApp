@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: debug
+  namespace: default
+  labels:
+    app: weblog
+    env: study
+spec:
+  containers:
+  - name: debug
+    image: debug:k8s_webApp
+    imagePullPolicy: Never
+    stdin: true
+    command: ["/bin/bash"]
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"

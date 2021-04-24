@@ -1,0 +1,10 @@
+## log in to pod
+$ kubectl exec -it pod/mongodb sh
+
+## run in pod/mongodb
+> $ mongo
+
+> show dbs ## 表示されない
+> use admin ## ユーザー変更
+> db.auth("admin", "Passw0rd") ## パスワード認証
+> show dbs ## 表示されるようになる
