@@ -59,3 +59,4 @@ attach_database:
 .PHONY: clean_storage
 clean_storage:
 	./database/utils/clean_storage.sh
+	touch ./storage/.gitkeep

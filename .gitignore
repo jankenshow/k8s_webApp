@@ -1,3 +1,6 @@
+# keep
+!.gitkeep
+
 # macOS
 .DS_Store
 
@@ -6,3 +9,4 @@
 
 # storage
 storage/**
+!storage/.gitkeep
