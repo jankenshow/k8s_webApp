@@ -13,7 +13,8 @@ refs:
 ## Environment
 
 - macOS
-- docker (as a vm tool for minikube)
+- ~~docker (as a vm tool for minikube)~~
+- hyperkit
 - minikube 
 
 kubernetes versions in minikube
@@ -23,8 +24,9 @@ Client Version: v1.19.7
 Server Version: v1.20.2
 ```
 
-Minikube creates vm on your mac (host PC), and
-kubernetes cluster runs on this vm.
+Minikube creates vm on your mac (host PC), and kubernetes cluster runs on this vm.  
+Although Minikube recommends docker as a vm driver, docker on mac (darwin) couldn't use ingress addon.  
+So, in this project, we use hyperkit as a vm driver.
 
 
 ## Installartion requirements
@@ -42,14 +44,14 @@ $ brew install kubectl
 
 ## Kubernetes environment setup
 
-In project root directory, run command below.
+In project root directory, run command below.  
 (If not specified, directories where instructions run commands are this directory.)
 
 ```
 $ make setup
 ```
 
-Above command creates kubernetes cluster with minikube vm environment,
+Above command creates kubernetes cluster with minikube vm environment,  
 mounting this project directory of host PC to minikube vm's `/home/docker/webApp` directory.
 
 refs :
@@ -60,7 +62,8 @@ TODO
 - build docker images
 - push images into minikube vm
 
-setup command does not build (also push into vm) docker images used for this app.
+setup command does not build (also push into vm) docker images used for this app.  
+Or simply build images in minikube vm.
 
 ## Run app (create kubernetes resources)
 

@@ -7,7 +7,7 @@ setup:
 	./minikube.sh
 
 .PHONY: clean
-setup:
+clean:
 	minikube stop
 	minikube delete
 
