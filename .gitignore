@@ -8,5 +8,5 @@
 **/node_modules
 
 # storage
-storage/**
-!storage/.gitkeep
+!storage/pv00?/.gitkeep
+storage/pv00?/*

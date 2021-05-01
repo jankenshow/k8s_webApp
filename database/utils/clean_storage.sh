@@ -1,5 +1,6 @@
 #!/bin/bash
 
-PROJECT_DIR=$(cd $(dirname $0); pwd)
+PROJECT_DIR=$(dirname $(dirname $(cd $(dirname $0); pwd)))
 
-rm -rf ${PROJECT_DIR}/storage/**
+
+rm -rf ${PROJECT_DIR}/storage/pv00?/*

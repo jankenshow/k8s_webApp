@@ -4,10 +4,21 @@ all: ;
 ## environment
 .PHONY: setup
 setup:
-	./minikube.sh
+	./minikube_docker.sh
+	./debug/docker/build.sh
+	./database/docker/build.sh
+
+.PHONY: docker
+docker:
+	./debug/docker/build.sh
+	./database/docker/build.sh
+
+.PHONY: secret_keyfile
+secrets_keyfile:
+	./database/utils/make_keyfile.sh
 
 .PHONY: clean
-clean:
+clean: clean_storage
 	minikube stop
 	minikube delete
 
@@ -15,16 +26,24 @@ clean:
 get_vm_ip:
 	minikube ip
 
+.PHONY: up
+up:
+	./minikube_docker.sh
+
+.PHONY: down
+down:
+	minikube stop
+
 
 ## app
-.PHONY: run
-run: apply_debug apply_database ;
-
-.PHONY: stop
-stop: delete_debug delete_database ;
+.PHONY: apply
+apply: apply_debug apply_database ;
 
 .PHONY: delete
-delete: delete_debug delete_database clean_storage ;
+delete: delete_debug delete_database ;
+
+.PHONY: clear
+clear: delete_debug delete_database clean_storage ;
 
 
 ## development
@@ -60,3 +79,6 @@ attach_database:
 clean_storage:
 	./database/utils/clean_storage.sh
 	touch ./storage/.gitkeep
+	touch ./storage/pv000/.gitkeep
+	touch ./storage/pv001/.gitkeep
+	touch ./storage/pv002/.gitkeep

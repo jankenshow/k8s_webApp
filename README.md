@@ -13,8 +13,8 @@ refs:
 ## Environment
 
 - macOS
-- ~~docker (as a vm tool for minikube)~~
-- hyperkit
+- docker (to build custom image)
+- ~~hyperkit (as a vm tool for minikube)~~
 - minikube 
 
 kubernetes versions in minikube
@@ -28,17 +28,31 @@ Minikube creates vm on your mac (host PC), and kubernetes cluster runs on this v
 Although Minikube recommends docker as a vm driver, docker on mac (darwin) couldn't use ingress addon.  
 So, in this project, we use hyperkit as a vm driver.
 
+-> mongodb could not be initialized in hyperkit vm driver with error message below,  
+   and we change this driver to docker driver.
+
+```
+WiredTiger error (22) [1619810532:313247][10:0x7f6475e74ca8], connection: __posix_sync, 108: /data/db/: directory-sync: fdatasync: Invalid argument Raw: [1619810532:313247][10:0x7f6475e74ca8], connection: __posix_sync, 108: /data/db/: directory-sync: fdatasync: Invalid argument
+```
 
 ## Installartion requirements
 
 ```
-## install one you like
+## Install one you like.
 $ brew install docker 
 $ brew install docker —cask 
 
-## install kubernetes tools
+# ## Install hyperkit if not installed.
+# $ brew install hyperkit
+
+## Install kubernetes tools.
 $ brew install minikube
-$ brew install kubectl
+# $ brew install kubectl
+
+## To install specific version of kubectl. (Homebrew is intended to install the latest version.)
+$ cd /usr/local/bin
+$ curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.20.2/bin/darwin/amd64/kubectl
+$ chmod +x ./kubectl
 ```
 
 
@@ -61,6 +75,7 @@ refs :
 TODO
 - build docker images
 - push images into minikube vm
+- explain about secrets resource.
 
 setup command does not build (also push into vm) docker images used for this app.  
 Or simply build images in minikube vm.

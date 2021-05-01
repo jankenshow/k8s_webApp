@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongo
+  namespace: default
+  labels:
+    app: weblog
+    type: database
+spec:
+  selector:
+    matchLabels:
+      app: weblog
+      type: database
+  serviceName: db-svc
+  replicas: 3
+  template:
+    metadata:
+      name: mongodb
+      namespace: default
+      labels:
+        app: weblog
+        type: database
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: mongodb
+          image: weblog-db:v1.0.0
+          imagePullPolicy: Never
+          args: 
+            - "mongod"
+            - "--auth"
+            - "--clusterAuthMode=keyFile"
+            - "--keyFile=/home/mongodb/keyfile"
+            - "--replSet=rs0"
+            - "--bind_ip_all" 
+          env:
+            - name: "MONGO_INITDB_ROOT_USERNAME"
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: root_username
+            - name: "MONGO_INITDB_ROOT_PASSWORD"
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: root_password
+            - name: "MONGO_INITDB_DATABASE"
+              value: "admin"
+          volumeMounts:
+            - mountPath: "/data/db"
+              name: storage
+            - mountPath: "/home/mongodb"
+              name: secret
+      volumes:
+        - name: secret
+          secret:
+            secretName: mongo-secret
+            items: 
+              - key: keyfile
+                path: keyfile
+                mode: 0700
+  volumeClaimTemplates:
+    - metadata:
+        name: storage
+        labels:
+          app: weblog
+      spec:
+        resources:
+          requests:
+            storage: 1Gi
+        accessModes:
+          - ReadWriteMany
+        storageClassName: slow
