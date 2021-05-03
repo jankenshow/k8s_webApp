@@ -1,0 +1,5 @@
+**/.vscode
+**/.git
+**/.DS_Stroe
+**/node_modules
+*.log

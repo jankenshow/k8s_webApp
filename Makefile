@@ -12,6 +12,7 @@ setup:
 docker:
 	./debug/docker/build.sh
 	./database/docker/build.sh
+	./app/docker/build.sh
 
 .PHONY: secret_keyfile
 secrets_keyfile:
@@ -39,11 +40,15 @@ down:
 .PHONY: apply
 apply: apply_debug apply_database ;
 
+.PHONY: init_db
+init_db:
+	./database/utils/initialize_db.sh
+
 .PHONY: delete
 delete: delete_debug delete_database ;
 
-.PHONY: clear
-clear: delete_debug delete_database clean_storage ;
+.PHONY: terminate
+terminate: delete_debug delete_database clean_storage ;
 
 
 ## development
@@ -55,6 +60,10 @@ apply_debug:
 apply_database:
 	./database/utils/apply_resources.sh
 
+.PHONY: apply_app
+apply_app:
+	./app/utils/apply_resources.sh
+
 
 .PHONY: delete_debug
 delete_debug:
@@ -63,6 +72,10 @@ delete_debug:
 .PHONY: delete_database
 delete_database:
 	./database/utils/delete_resources.sh
+
+.PHONY: delete_app
+delete_app:
+	./app/utils/delete_resources.sh
 
 
 .PHONY: attach_debug
@@ -78,7 +91,3 @@ attach_database:
 .PHONY: clean_storage
 clean_storage:
 	./database/utils/clean_storage.sh
-	touch ./storage/.gitkeep
-	touch ./storage/pv000/.gitkeep
-	touch ./storage/pv001/.gitkeep
-	touch ./storage/pv002/.gitkeep

@@ -4,7 +4,7 @@ YAML_DIR=$(dirname $(cd $(dirname $0); pwd))
 # PROJECT_DIR=$(dirname $(dirname $(cd $(dirname $0); pwd)))
 
 GRACE=$(kubectl get pods mongo-0 --template '{{.spec.terminationGracePeriodSeconds}}')
-kubectl delete sts -l app=weblog
+kubectl delete sts,svc -l app=weblog
 sleep $GRACE
 kubectl delete pvc,pv -l app=weblog
 

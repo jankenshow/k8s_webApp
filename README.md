@@ -9,7 +9,6 @@ refs:
 - https://minikube.sigs.k8s.io/docs/
 
 
-
 ## Environment
 
 - macOS
@@ -35,7 +34,7 @@ So, in this project, we use hyperkit as a vm driver.
 WiredTiger error (22) [1619810532:313247][10:0x7f6475e74ca8], connection: __posix_sync, 108: /data/db/: directory-sync: fdatasync: Invalid argument Raw: [1619810532:313247][10:0x7f6475e74ca8], connection: __posix_sync, 108: /data/db/: directory-sync: fdatasync: Invalid argument
 ```
 
-## Installartion requirements
+## Installation requirements
 
 ```
 ## Install one you like.
@@ -83,20 +82,21 @@ Or simply build images in minikube vm.
 ## Run app (create kubernetes resources)
 
 ```
-$ make run
+$ make apply
+$ make init_db ## this takes few minutes
 ```
 
 
 ## Stop app (delete kubernetes resources)
 
 ```
-$ make stop
+$ make delete
 ```
 
 ## Clean up app (stop app and delete DB data)
 
 ```
-$ make delete
+$ make terminate
 ```
 
 
