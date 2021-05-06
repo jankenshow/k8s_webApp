@@ -4,6 +4,7 @@ PROJECT_DIR=$(cd $(dirname $0); pwd)
 
 minikube start \
     --driver=hyperkit \
+    --memory 6g \
     --mount --mount-string="${PROJECT_DIR}:/home/docker/webApp" \
     --addons ingress \
     --kubernetes-version="v1.20.2" \

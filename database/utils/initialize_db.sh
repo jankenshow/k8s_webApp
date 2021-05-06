@@ -1,6 +1,8 @@
 #!/bin/bash
 
+echo "Replicating mongodb..."; \
 kubectl exec -it pod/mongo-0 -- /data/src/replicate_db.sh; \
+echo "Creating a user and tables..."; \
 sleep 15; \
 kubectl exec -it pod/mongo-0 -- /data/src/init.sh
 

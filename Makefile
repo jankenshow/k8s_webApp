@@ -64,6 +64,12 @@ apply_database:
 apply_app:
 	./app/utils/apply_resources.sh
 
+.PHONY: apply_app_debug
+apply_app_debug:
+	./app/debug/check_primary_db_ip.sh
+	./app/debug/apply_resources.sh
+	./app/debug/run_debug_app.sh
+
 
 .PHONY: delete_debug
 delete_debug:
@@ -76,6 +82,10 @@ delete_database:
 .PHONY: delete_app
 delete_app:
 	./app/utils/delete_resources.sh
+
+.PHONY: delete_app_debug
+delete_app_debug:
+	./app/debug/stop_debug.sh
 
 
 .PHONY: attach_debug

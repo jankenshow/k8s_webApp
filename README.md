@@ -19,7 +19,7 @@ refs:
 kubernetes versions in minikube
 
 ```
-Client Version: v1.19.7
+Client Version: v1.20.2
 Server Version: v1.20.2
 ```
 
@@ -72,9 +72,8 @@ refs :
 
 
 TODO
-- build docker images
-- push images into minikube vm
-- explain about secrets resource.
+- explain about debug resource.
+- revise makefile.
 
 setup command does not build (also push into vm) docker images used for this app.  
 Or simply build images in minikube vm.
@@ -86,6 +85,8 @@ $ make apply
 $ make init_db ## this takes few minutes
 ```
 
+TODO
+- application (node.js resources are under development)
 
 ## Stop app (delete kubernetes resources)
 
