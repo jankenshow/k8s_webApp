@@ -1,0 +1,39 @@
+## check whether pod works 
+### $ kubectl apply -f ./app/weblog-app-service.yaml
+### $ kubectl apply -f ./app/weblog-app-pod.yaml
+## and curl [pod/nodeapp IP]:3000 from pod/debug
+
+# apiVersion: v1
+# kind: Pod
+# metadata:
+#   name: nodeapp
+#   namespace: default
+#   labels:
+#     app: weblog
+#     type: application
+# spec:
+#   containers:
+#     - name: node
+#       image: weblog-app:v1.0.0
+#       imagePullPolicy: Never
+#       # stdin: true
+#       # command: ["/bin/sh"]
+#       ports:
+#         - containerPort: 3000
+#       env:
+#         - name: "MONGODB_USERNAME"
+#           valueFrom:
+#             secretKeyRef: 
+#               name: mongo-secret
+#               key: weblog_username
+#         - name: "MONGODB_PASSWORD"
+#           valueFrom:
+#             secretKeyRef: 
+#               name: mongo-secret
+#               key: weblog_password
+#         - name: "MONGODB_HOSTS"
+#           value: "mongo-0.db-svc:27017,mongo-1.db-svc:27017,mongo-2.db-svc:27017"
+#         - name: "MONGODB_DATABASE"
+#           value: "weblog"
+#         - name: "MONGODB_REPLICASET"
+#           value: "rs0"

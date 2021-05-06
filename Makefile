@@ -14,6 +14,12 @@ docker:
 	./database/docker/build.sh
 	./app/docker/build.sh
 
+.PHONY: push_image
+push_image:
+	minikube image load debug:k8s_webApp
+	minikube image load weblog-db:v1.0.0
+	minikube image load weblog-app:v1.0.0
+
 .PHONY: secret_keyfile
 secrets_keyfile:
 	./database/utils/make_keyfile.sh

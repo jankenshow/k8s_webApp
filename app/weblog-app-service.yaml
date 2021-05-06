@@ -1,0 +1,16 @@
+## curl http://app-svc:3000　でアクセスできる
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc
+  namespace: default
+  labels:
+    app: weblog
+    type: application
+spec:
+  selector:
+    app: weblog
+    type: application
+  ports:
+  - port: 3000
+    targetPort: 3000

@@ -73,6 +73,8 @@ refs :
 
 TODO
 - explain about debug resource.
+- describe for creating secret resources.
+- build docker images in minikube env.
 - revise makefile.
 
 setup command does not build (also push into vm) docker images used for this app.  
@@ -110,10 +112,13 @@ $ make terminate
 
 ## Kubernetes architecture
 
-### debug pod
+### debug resource
 
-### database statefulset
+### database resources
 
+### app resources
+
+### ingress resources
 
 ## directories
 
@@ -123,7 +128,14 @@ $ make terminate
 .
 ├── Makefile                        : commands
 ├── README.md
-├── database                        : mongodb resource files
+├── app                             : application resources files
+│   ├── debug
+│   ├── docker                      : dockerfile and etc...
+│   ├── src                         : the body of application. (node.js scripts)
+│   ├── utils                       : commands related to mongodb resources
+│   └── <[resource].yaml>           : resources definition
+├── database                        : mongodb resources files
+│   ├── debug
 │   ├── docker                      : dockerfile and etc...
 │   ├── <keyfile>                   : secrets value file for mongodb environment
 │   ├── utils                       : commands related to mongodb resources
@@ -133,6 +145,7 @@ $ make terminate
 │   ├── docker
 │   ├── <mongodb-org-4.0.repo>      : mongodb client repository file
 │   └── utils
-├── <minikube.sh>                   : minikube start commands
+├── Makefile                        : shortcut commands
+├── <minikube_hogehoge.sh>          : commands to start minikube cluster
 └── storage                         : mongodb data directory
 ```
