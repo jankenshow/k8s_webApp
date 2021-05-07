@@ -46,7 +46,7 @@ down:
 
 ## app
 .PHONY: apply
-apply: apply_debug apply_database init_db apply_app ;
+apply: apply_debug apply_database init_db apply_app apply_server ;
 
 .PHONY: init_db
 init_db:

@@ -76,6 +76,7 @@ TODO
 - describe for creating secret resources.
 - build docker images in minikube env.
 - revise makefile.
+- 
 
 setup command does not build (also push into vm) docker images used for this app.  
 Or simply build images in minikube vm.
@@ -89,6 +90,12 @@ $ make init_db ## this takes few minutes
 
 TODO
 - application (node.js resources are under development)
+
+
+## Access app
+
+access `localhost:30000` on your local browser
+
 
 ## Stop app (delete kubernetes resources)
 

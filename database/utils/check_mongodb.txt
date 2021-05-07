@@ -8,3 +8,15 @@ $ kubectl exec -it pod/mongodb sh
 > use admin ## ユーザー変更
 > db.auth("admin", "Passw0rd") ## パスワード認証
 > show dbs ## 表示されるようになる
+
+
+## Secondary DBでの操作
+
+```
+$ db.slaveOk()
+```
+
+PRIMARYからSECONDARYへデータを反映する際、内部的にはoplogと呼ばれるクエリ実行情報が非同期でPRIMARYからSECONDARYに伝送され、  
+それをSECONDARYが読み取って反映する、という流れになっている。  
+このとき、oplogを伝送 & 反映する微妙なラグがあるため、SECONDARYは不正確(=PRIMARYと異なる状態)になっている可能性がある。  
+そのための宣言的なもの。  
