@@ -53,10 +53,10 @@ init_db:
 	./database/utils/initialize_db.sh
 
 .PHONY: delete
-delete: delete_debug delete_database ;
+delete: delete_debug delete_database delete_app delete_server ;
 
 .PHONY: terminate
-terminate: delete_debug delete_database clean_storage ;
+terminate: delete_debug delete_database delete_app delete_server clean_storage ;
 
 
 ## development
