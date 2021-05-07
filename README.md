@@ -105,8 +105,9 @@ $ make terminate
 
 ## App architecture
 
+- ingress
 - nginx
-- node.js server
+- node.js
 - mongodb
 
 
@@ -116,7 +117,9 @@ $ make terminate
 
 ### database resources
 
-### app resources
+### application resources
+
+### webserver resources
 
 ### ingress resources
 
@@ -132,20 +135,24 @@ $ make terminate
 │   ├── debug
 │   ├── docker                      : dockerfile and etc...
 │   ├── src                         : the body of application. (node.js scripts)
-│   ├── utils                       : commands related to mongodb resources
+│   ├── utils                       : commands related to application resources
 │   └── <[resource].yaml>           : resources definition
 ├── database                        : mongodb resources files
 │   ├── debug
-│   ├── docker                      : dockerfile and etc...
-│   ├── <keyfile>                   : secrets value file for mongodb environment
-│   ├── utils                       : commands related to mongodb resources
-│   └── <[resource].yaml>           : resources definition
-├── debug                           : debug pod files
-│   ├── <[resource].yaml>
 │   ├── docker
+│   ├── <keyfile>                   : secrets value file for mongodb environment
+│   ├── utils
+│   └── <[resource].yaml>
+├── debug                           : debug pod files
+│   ├── docker
+│   ├── utils
 │   ├── <mongodb-org-4.0.repo>      : mongodb client repository file
-│   └── utils
-├── Makefile                        : shortcut commands
-├── <minikube_hogehoge.sh>          : commands to start minikube cluster
-└── storage                         : mongodb data directory
+│   └── <[resource].yaml>
+├── sever                           : webserver resouces files
+│   ├── docker
+│   ├── utils
+│   └── <[resource].yaml>
+├── storage                         : mongodb data directory
+├── <Makefile>                      : shortcut commands
+└── <minikube_hogehoge.sh>          : commands to start minikube cluster
 ```

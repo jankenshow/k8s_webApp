@@ -13,12 +13,14 @@ docker:
 	./debug/docker/build.sh
 	./database/docker/build.sh
 	./app/docker/build.sh
+	./server/docker/build.sh
 
 .PHONY: push_image
 push_image:
 	minikube image load debug:k8s_webApp
 	minikube image load weblog-db:v1.0.0
 	minikube image load weblog-app:v1.0.0
+	minikube image load weblog-web:v1.0.0
 
 .PHONY: secret_keyfile
 secrets_keyfile:
@@ -44,7 +46,7 @@ down:
 
 ## app
 .PHONY: apply
-apply: apply_debug apply_database ;
+apply: apply_debug apply_database init_db apply_app ;
 
 .PHONY: init_db
 init_db:
@@ -70,11 +72,20 @@ apply_database:
 apply_app:
 	./app/utils/apply_resources.sh
 
+.PHONY: apply_server
+apply_server:
+	./server/utils/apply_resources.sh
+
 .PHONY: apply_app_debug
 apply_app_debug:
 	./app/debug/check_primary_db_ip.sh
 	./app/debug/apply_resources.sh
 	./app/debug/run_debug_app.sh
+
+.PHONY: apply_server_debug
+apply_server_debug:
+	./server/debug/apply_resources.sh
+	./server/debug/run_container.sh
 
 
 .PHONY: delete_debug
@@ -89,9 +100,17 @@ delete_database:
 delete_app:
 	./app/utils/delete_resources.sh
 
+.PHONY: delete_server
+delete_server:
+	./server/utils/delete_resources.sh
+
 .PHONY: delete_app_debug
 delete_app_debug:
 	./app/debug/stop_debug.sh
+
+.PHONY: delete_server_debug
+delete_server_debug:
+	./server/debug/stop_debug.sh
 
 
 .PHONY: attach_debug

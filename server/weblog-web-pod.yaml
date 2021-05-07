@@ -1,0 +1,25 @@
+# kind: Pod
+# apiVersion: v1
+# metadata:
+#   name: nginx
+#   namespace: default
+#   labels:
+#     app: weblog
+#     type: frontend
+# spec:
+#   containers:
+#     - name: nginx
+#       image: weblog-web:v1.0.0
+#       imagePullPolicy: Never
+#       ports:
+#         - containerPort: 80
+#       env:
+#         - name: "APPLICATION_HOST"
+#           value: "app-svc:3000"
+#       volumeMounts:
+#         - name: config-volume
+#           mountPath: /home/nginx
+#   volumes:
+#     - name: config-volume
+#       configMap:
+#         name: nginx-config
